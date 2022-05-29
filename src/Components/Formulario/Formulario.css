@@ -1,0 +1,161 @@
+input[type=text] {
+  width: 100%;
+  padding: 5px;
+  /* border: 1px solid #ccc; */
+  border-radius: 4px;
+  font-size: calc(8px + 2vmin);
+  resize: vertical;
+}
+
+.divItemForm{
+  display: flex;
+}
+
+.divLabelForm>label {
+  color: black;
+  padding: 5px 5px 5px 5px;
+  display: flex;
+  font-size: calc(8px + 2vmin);
+}
+
+input[type=submit] {
+  width: 260px;
+  background-color: #04AA6D;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  float: right;
+}
+
+input[type=submit]:hover {
+  background-color: #45a049;
+}
+
+.formulario {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  width: 50%;
+  padding: 30px;
+  border: 2px solid black;
+  color: black
+}
+
+.divLabelForm {
+  display: flex;
+  float: left;
+  width: 30%;
+  margin: 5;
+  padding: 0px;
+}
+
+strong{
+  color: darkred;
+  font-weight: 900;
+}
+
+.divInputForm {
+  display: flex;
+  flex-direction: column;
+  float: left;
+  width: 95%;
+  margin: 5px;
+  padding: 0;
+}
+
+.divItemForm:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.divBtnForm{
+  justify-content: end;
+  margin-top: 40px;
+  width: 90%;
+}
+
+.tituloForm{
+  font-size: calc(8px + 2vmin);
+  color: darkred;
+}
+
+.infoForm, .errorMessage{
+  padding: 5px;
+  font-size: calc(5px + 1vmin);
+  color: darkred;
+  text-align: left;
+  width: 100%;
+}
+
+.infoForm{
+  text-align: center;
+}
+
+.inputError{
+  border: 1.5px solid red;
+}
+
+.divModalPpal{
+  display: none;
+  position: absolute;
+  top:85%;
+  left: 60%;
+  width: 35%;
+  height: 10%;
+  background-color: #333;
+  border: 5px solid #000;
+  color: black;
+  border-radius: 10px;
+  justify-content: center;
+  align-content: center;
+  animation: salida 2s infinite linear ;
+  overflow: hidden;
+}
+
+.mensajeModal {
+  display: flex;
+  align-items: center;
+  color: blanchedalmond;
+}
+
+.mostrarModal{
+  display:flex;
+  animation: entrada 2s ;
+}
+
+@keyframes salida {
+  0%   {left:100%}
+  100% {left:60%}
+}
+
+@keyframes entrada {
+  0%   {width: 0; left: 100%;}
+  100% {width: 35%; left: 60%;}
+}
+
+@media screen and (max-width: 920px) {
+  .divLabelForm, .divInputForm, input[type=submit] {
+    width: 90%;
+  }
+
+  .divItemForm{
+    flex-direction: column;
+  }
+  .formulario{
+    width: 97%;
+    align-items: center;
+    border: none;
+    background: transparent;
+    padding: 5px;
+  }
+  .divBtnForm{
+    display: flex;
+    justify-content: center;
+    margin: 20px 0 0 0; 
+  }
+}

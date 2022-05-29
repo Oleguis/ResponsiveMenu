@@ -1,24 +1,51 @@
-import logo from './logo.svg';
 import './App.css';
+import Formulario from './Components/Formulario/Formulario';
+import NavBar from './Components/NavBar/NavBar';
+import { Route, Routes } from 'react-router-dom';
+
+const listaRutas = [
+  {id:1, name: 'Vivair'},
+  {id:2, name: 'Avianca'},
+  {id:3, name: 'American Air Line'},
+  {id:4, name: 'Latam'},
+  {id:5, name: 'Wingo'},
+  {id:6, name: 'Satena'},
+];
+
+
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <NavBar listaRutas={listaRutas} />
       </header>
-    </div>
+      <section className='App-Seccion'>
+        <Routes>
+          <Route path='/'>
+          {listaRutas.map(linea => {
+            return (
+            <Route 
+              exact path = {`/${linea.name.replace(/ /g,'')}`} 
+              element = {<Formulario itemName={linea.name} />}
+              key = {'rut-' + linea.name.replace(/ /g,'')}>
+            </Route>)
+          })}
+            <Route path='/' element={<h1>Home Page</h1>}></Route>
+          </Route>
+        </Routes>
+        {/*<Routes >
+            <Route path = '/' element={<App />}></Route>
+            {listaRutas.map(linea => {
+              return (
+              <Route 
+                exact path = {`/${linea.name}`} 
+                element = {<Formulario itemName={linea.name} />}>
+              </Route>)
+            })}
+          </Routes>*/}
+      </section>
+      </div>
   );
 }
 

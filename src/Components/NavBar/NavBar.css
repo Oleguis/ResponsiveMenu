@@ -1,0 +1,86 @@
+.App-logo {
+  height: 5vmin;
+  pointer-events: none;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 10s linear;
+  }
+}
+
+.divLogo {
+  display: flex;
+  flex-direction: row;
+  background-color: #282c34;
+  min-height: 10vh;
+  align-items: center;
+  justify-content: space-between;
+  font-size: calc(8px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.navbarMenu {
+  display: flex;
+  height: 10vh;
+  background-color: transparent;
+  overflow: auto;
+  align-items: center;
+}
+
+.navbarMenu a {
+  display: flex;
+  align-items: center;
+  vertical-align: middle;
+  height: 6.5vh;
+  float: left;
+  padding: 12px;
+  color: white;
+  text-decoration: none;
+  font-size: calc(8px + 2vmin);
+}
+
+.navbarMenu a:hover {
+  background-color: #000;
+}
+
+@media screen and (max-width: 920px) {
+  .navbarMenu, .App-header{
+    flex-direction: column;
+    align-items: baseline;
+    justify-content: flex-start;
+    /* float: none; */
+  }
+  .navbarMenu a{
+    height: 5vmin;
+  }
+  .divLogo{
+    min-height: fit-content;
+    width: 100%;
+    justify-content: center;
+  }
+
+  .navbarMenu{
+    height: 100vh;
+  }
+
+  .divLogo img{
+    width: 6vmin;
+  }
+  
+  .divLogo p{
+    margin: 10px 10px 10px 0;
+  }
+}
