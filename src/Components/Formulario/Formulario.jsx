@@ -32,7 +32,7 @@ function Formulario({itemName}) {
       datos.nombre.error = 'Nombre inválido. No puede contener números o estar vacío';
       validacion = false;
     };
-    if (!/^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i.test(datos.correo.valor) ) {
+    if (!/^[-\wñÑáéíóú.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i.test(datos.correo.valor) ) {
       datos.correo.error = 'Correo inválido. No puede estar vacío y debe ser de tipo email';
       validacion = false;
     };
@@ -62,9 +62,7 @@ function Formulario({itemName}) {
     const campo = e.target.name;
     if (campo === 'edad' && !/^\d*$/.test(e.target.value)) return
     if (campo === 'celular'){
-      console.log('*****\n' ,e ,'\n*****');
-      console.log(e.target.value.length)
-      if ((!/^\d*$/.test(e.target.value.slice(-1)) && !'()+'.includes(e.target.value.slice(-1))) || e.target.value.length === 15 ) return
+      if ((!/^\d*$/.test(e.target.value.slice(-1)) && !'()+'.includes(e.target.value.slice(-1))) || e.target.value.length === 16 ) return
       if (e.target.value.length === 1 && e.target.value !== '+') datos[campo].valor = '+' + e.target.value;
       else if (e.target.value.length === 3 && /^\d*$/.test(e.target.value.slice(-1))) datos[campo].valor = e.target.value + '(';
       else if (e.target.value.length === 7  && /^\d*$/.test(e.target.value.slice(-1))) datos[campo].valor = e.target.value + ')';
