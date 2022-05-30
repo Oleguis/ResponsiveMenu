@@ -37,10 +37,9 @@ body {
 @media screen and (max-width: 920px) {
   .App-header, .App-Seccion{
     flex-direction: column;
-    align-items: baseline;
-    justify-content: start;
     padding-top: 10px;
-    /* float: none; */
+    /* align-items: baseline;
+    justify-content: start; */
   }
   .App{
     flex-direction: row;

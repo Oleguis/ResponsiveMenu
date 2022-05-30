@@ -14,13 +14,15 @@ function Formulario({itemName}) {
   const [mensajeModal, setMensajeModal] = useState('');
   const [classeModal, setClasseModal] = useState('divModalPpal')
   const navigate = useNavigate();
+
+
   function desplegarMensaje(){
     setClasseModal('divModalPpal mostrarModal');
     setMensajeModal(`Datos enviados a ${itemName} correctamente`);
     setTimeout(()=>{
         setMensajeModal('');
         setClasseModal('divModalPpal');
-        setDatos({...initialState});
+        setDatos(()=>initialState)
         navigate("/");
       },5000);
   }
@@ -51,6 +53,10 @@ function Formulario({itemName}) {
         celular: datos.celular.valor,
         edad: datos.edad.valor
       })
+      setDatos({nombre: {valor:'',error: ''},
+      correo: {valor:'',error: ''},
+      celular: {valor:'+',error: ''},
+      edad: {valor:'',error: ''},})
       desplegarMensaje();
     }else{
       setDatos({...datos})
@@ -71,6 +77,7 @@ function Formulario({itemName}) {
     datos[campo].error = '';
     setDatos({...datos})
   }
+
 
   return (
     <>
