@@ -1,88 +1,85 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState} from 'react'
 import {useNavigate} from 'react-router';
 import './Formulario.css'
 
+const initialState = {
+  nombre: {valor:'',error: ''},
+  correo: {valor:'',error: ''},
+  celular: {valor:'+',error: ''},
+  edad: {valor:'',error: ''},
+}
 
 function Formulario({itemName}) {
-  const [datos, setDatos] = useState({
-    nombre: {valor:'',error: ''},
-    correo: {valor:'',error: ''},
-    celular: {valor:'+',error: ''},
-    edad: {valor:'',error: ''},
-  })
+  const variable = itemName.replace(/ /g,'');
+  const [datos, setDatos] = useState({[variable]:initialState})
   const [mensajeModal, setMensajeModal] = useState('');
   const [classeModal, setClasseModal] = useState('divModalPpal')
   const navigate = useNavigate();
 
-  console.log('this is a test')
+
   function desplegarMensaje(){
     setClasseModal('divModalPpal mostrarModal');
     setMensajeModal(`Datos enviados a ${itemName} correctamente`);
-    const salida = setTimeout(()=>{
+    setTimeout(()=>{
         setMensajeModal('');
         setClasseModal('divModalPpal');
-        setDatos({
-          nombre: {valor:'',error: ''},
-          correo: {valor:'',error: ''},
-          celular: {valor:'+',error: ''},
-          edad: {valor:'',error: ''},
-        })
+        setDatos(()=>initialState)
         navigate("/");
       },5000);
   }
 
   function sendData(e){
     e.preventDefault();
-    const newDatos = {...datos};
     let validacion = true;
-    if (newDatos.nombre.valor === '' || /\d/.test(newDatos.nombre.valor)) {
-      newDatos.nombre.error = 'Nombre inválido. No puede contener números o estar vacío';
+    if (datos.nombre.valor === '' || /\d/.test(datos.nombre.valor)) {
+      datos.nombre.error = 'Nombre inválido. No puede contener números o estar vacío';
       validacion = false;
     };
-    if (!/^[-\wñÑáéíóú.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i.test(newDatos.correo.valor) ) {
-      newDatos.correo.error = 'Correo inválido. No puede estar vacío y debe ser de tipo email';
+    if (!/^[-\wñÑáéíóú.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i.test(datos.correo.valor) ) {
+      datos.correo.error = 'Correo inválido. No puede estar vacío y debe ser de tipo email';
       validacion = false;
     };
-    if (!/\+[0-9]{2}\([0-9]{3}\)[0-9]{7}/.test(newDatos.celular.valor)) {
-      newDatos.celular.error = 'Número de célular inválido. Debe ser de esta forma "+12(123)1234567"'
+    if (!/\+[0-9]{2}\([0-9]{3}\)[0-9]{7}/.test(datos.celular.valor)) {
+      datos.celular.error = 'Número de célular inválido. Debe ser de esta forma "+12(123)1234567"'
       validacion = false;
     };
-    if (newDatos.edad.valor < 18 || newDatos.edad.valor > 100) {
-      newDatos.edad.error = 'Edad fuera de rango. Debe ser mayor de edad y menor de 100'
+    if (datos.edad.valor < 18 || datos.edad.valor > 100) {
+      datos.edad.error = 'Edad fuera de rango. Debe ser mayor de edad y menor de 100'
       validacion = false;
     };
     if (validacion){
+      console.table({
+        nombre:datos.nombre.valor,
+        email:datos.correo.valor,
+        celular: datos.celular.valor,
+        edad: datos.edad.valor
+      })
+      setDatos({nombre: {valor:'',error: ''},
+      correo: {valor:'',error: ''},
+      celular: {valor:'+',error: ''},
+      edad: {valor:'',error: ''},})
       desplegarMensaje();
     }else{
-      setDatos(newDatos)
+      setDatos({...datos})
     }
+ 
   }
+
   function onHandLetChange(e){
     const campo = e.target.name;
-    const newDatos={...datos} 
     if (campo === 'edad' && !/^\d*$/.test(e.target.value)) return
     if (campo === 'celular'){
       if ((!/^\d*$/.test(e.target.value.slice(-1)) && !'()+'.includes(e.target.value.slice(-1))) || e.target.value.length === 16 ) return
-      if (e.target.value.length === 1 && e.target.value !== '+') newDatos[campo].valor = '+' + e.target.value;
-      else if (e.target.value.length === 3 && /^\d*$/.test(e.target.value.slice(-1))) newDatos[campo].valor = e.target.value + '(';
-      else if (e.target.value.length === 7  && /^\d*$/.test(e.target.value.slice(-1))) newDatos[campo].valor = e.target.value + ')';
-      else newDatos[campo].valor = e.target.value;
-    }else newDatos[campo].valor = e.target.value;
-    newDatos[campo].error = '';
-    setDatos({...newDatos})
+      if (e.target.value.length === 1 && e.target.value !== '+') datos[campo].valor = '+' + e.target.value;
+      else if (e.target.value.length === 3 && /^\d*$/.test(e.target.value.slice(-1))) datos[campo].valor = e.target.value + '(';
+      else if (e.target.value.length === 7  && /^\d*$/.test(e.target.value.slice(-1))) datos[campo].valor = e.target.value + ')';
+      else datos[campo].valor = e.target.value;
+    }else datos[campo].valor = e.target.value;
+    datos[campo].error = '';
+    setDatos({...datos})
   }
 
 
-  useEffect(() => {
-    console.log('entro')
-    return () => {
-      setDatos({nombre: {valor:'',error: ''},
-        correo: {valor:'',error: ''},
-        celular: {valor:'+',error: ''},
-        edad: {valor:'',error: ''}})
-    }
-  }, [itemName])
-  
   return (
     <>
     <form className='formulario' onSubmit={sendData}>

@@ -7,8 +7,6 @@ const listaRutas = [
   {id:1, name: 'Vivair'},
   {id:2, name: 'Avianca'},
   {id:3, name: 'American Air Line'},
-  {id:4, name: 'Latam'},
-  {id:5, name: 'Wingo'},
   {id:6, name: 'Satena'},
 ];
 
@@ -34,16 +32,6 @@ function App() {
             <Route path='/' element={<h1>Home Page</h1>}></Route>
           </Route>
         </Routes>
-        {/*<Routes >
-            <Route path = '/' element={<App />}></Route>
-            {listaRutas.map(linea => {
-              return (
-              <Route 
-                exact path = {`/${linea.name}`} 
-                element = {<Formulario itemName={linea.name} />}>
-              </Route>)
-            })}
-          </Routes>*/}
       </section>
       </div>
   );
